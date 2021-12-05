@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trabalho pratico 2 search</title>
+</head>
+<body>
+<div>
+    <h3>Pesquisar repositorios</h3>
+    <div class="input-group mb-3">
+    <input type="text" id="search" class="form-control" placeholder="Escreva um nome para procurar">
+    <button id="searchButton" class="btn btn-primary">Pesquisar</button>
+</div>
+    <div id="searchContainer"></div>
+</div>
+</body>
+<style>
+#searchContainer{
+    
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#searchButton').click(function() {
+            const search = $('#search').val()
+            $.ajax({
+                url: `https://api.github.com/search/repositories?q=${search}`,
+                type: 'GET',
+                success: function (result) {
+                    result.items.forEach(function (repo) {
+                        $('#searchContainer').append(`
+                            <div class="card">
+                                Nome: ${repo.name}</br>
+                                Descrição: ${repo.description ?? 'Nenhuma'}</br>
+                                Linguagem usada: ${repo.language ?? 'Nenhuma'}</br>
+                                <a href="${repo.html_url}" class="btn btn-primary">Ir para o repositorio</a></br>
+                            </div>
+                        `)
+                    })
+                }
+            })
+        })
+    })
+</script>
+</html>

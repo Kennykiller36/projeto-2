@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trabalho pratico 2</title>
+</head>
+
+<body>
+  <div class="conteiner">
+    <img id="avatar" />
+    <span id="name"></span>
+    <span id="arroba"></span><br>
+    <span id="followercount"></span>
+    <span id="followingcount"></span>
+  </div>
+  <div id="reposContainer">Repositórios:</div>
+  </div>
+</body>
+
+<style>
+  #avatar{
+    width: 100%;
+    max-width: 400px;
+  }
+  .conteiner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: orange;
+  }
+  #reposContainer{
+    background-color: purple;
+    color: white;
+  }
+  #reposContainer > .card{
+    background-color: purple;
+    color: white;
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $.ajax({
+      url: 'https://api.github.com/users/Kennykiller36',
+      type: 'GET',
+      success: function (result) {
+        $('#avatar').attr('src', result.avatar_url)
+        $('#name').append(`<a href="${result.html_url}">${result.name}</a>`)
+        $('#arroba').append(result.login)
+        $('#followercount').append(`<a href="${result.html_url}?tab=followers">Seguidores: ${result.followers}</a>`)
+        $('#followingcount').append(`<a href="${result.html_url}?tab=following">Seguindo: ${result.following}</a>`)
+      }
+    })
+    $.ajax({
+      url: 'https://api.github.com/users/Kennykiller36/following',
+      type: 'GET',
+      success: function (result) {
+        console.log(result.length);
+      }
+    })
+    $.ajax({
+      url: 'https://api.github.com/users/Kennykiller36/repos',
+      type: 'GET',
+      success: function (result) {
+        result.forEach(function (repo) {
+          $('#reposContainer').append(`
+                        <div class="card">
+                           Nome: ${repo.name}</br>
+                           Descrição: ${repo.description ?? 'Nenhuma'}</br>
+                           Linguagem usada: ${repo.language ?? 'Nenhuma'}</br>
+                           <a href="${repo.html_url}" class="btn btn-primary">Link para repositorio</a></br>
+                        </div>
+                    `)
+        })
+      }
+    })
+  })
+</script>
+
+</html>
