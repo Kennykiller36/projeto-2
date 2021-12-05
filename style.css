@@ -1,0 +1,79 @@
+.html{
+    position:static;
+}
+.header{
+    background:lightgray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu li{
+    list-style: none;
+    display: inline-flex;
+}
+.perfil div img{
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 10%;
+    border-style: solid;
+    border-color: aqua;
+}
+.items-redes{
+    display: inline;
+    color:transparent;
+    border: none;
+    cursor:pointer;
+    overflow: hidden  
+}
+.perfil p{
+    font-size: large;
+}
+.perfil b{
+    font-size: larger;
+}
+.projetos div img{
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 10%;
+    border-style: solid;
+    border-color: red;
+}
+.projetos{
+    display: inline;
+}
+.experiencia div img{
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 10%;
+    border-style: solid;
+    border-color: yellow;
+
+}
+
+.repositorios-github{
+    margin-left: 7.5cm;
+    margin-right: 7.5cm;
+
+}
+.experiencia h1{
+    font-size: large;
+}
+.Experiencia p{
+    font-size: larger;
+}
+.perfil b{
+    font-size: larger;
+}
+.repositorios-github{
+    background-color: lightgray;
+}
+.footer {
+    background: lightgrey;
+    color: black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-top: 50px;
+}
